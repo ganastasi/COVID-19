@@ -112,7 +112,7 @@ fig1 = px.scatter_geo(df,
                      color='Continent_Name',
                      hover_name='CountryName',
                      size='ConfirmedCases',
-                     size_max=100,
+                     size_max=40,
                      animation_frame='DateFormat1',
                      projection='equirectangular',
                      scope='world',
@@ -140,7 +140,7 @@ df_top5 = df_top5.reset_index(drop=True)
 
 # plot
 fig2 = px.line(df_top5,
-               title='ConfirmedCases (Top 5 Countries)',
+               title='Top 5 Countries: ConfirmedCases',
                x='DateFormat1', 
                y='ConfirmedCases', 
                color='CountryName',
@@ -274,7 +274,7 @@ def updateFigure1(scope, measure, policy):
                                    color='Continent_Name',
                                    hover_name='CountryName',
                                    size=measure, # if measure is not equal to confirmed cases return selection
-                                   size_max=100,
+                                   size_max=40,
                                    animation_frame='DateFormat1',
                                    projection='equirectangular',
                                    scope=scope, # if scope is not equal to world adjust to selection
