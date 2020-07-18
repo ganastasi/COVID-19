@@ -107,7 +107,7 @@ df = df.sort_values(by='DateFormat1')
 import plotly.express as px
 
 fig1 = px.scatter_geo(df,
-                     title='ConfirmedCases (world)',
+                     title='World: ConfirmedCases',
                      locations='CountryCode',
                      color='Continent_Name',
                      hover_name='CountryName',
@@ -116,7 +116,11 @@ fig1 = px.scatter_geo(df,
                      animation_frame='DateFormat1',
                      projection='equirectangular',
                      scope='world',
-                     opacity=0.8)
+                     opacity=0.8,
+                     labels={'CountryCode':'Country Code',
+                             'CountryName':'Country Name',
+                             'Continent_Name':'Continent Name',
+                             'DateFormat1' : 'Date'})
 
 
 # =============================================================================
@@ -191,7 +195,7 @@ app.layout = html.Div([
                                     value='world')
                                 ], className = 'four columns'),
                             html.Div([
-                                # radio-button
+                                # dropdown
                                 html.Label('Select a measure:'), 
                                 dcc.Dropdown(
                                     id='measure', 
@@ -201,7 +205,7 @@ app.layout = html.Div([
                                     value='ConfirmedCases')
                                 ], className = 'four columns'),
                             html.Div([
-                                # radio-button
+                                # dropdown
                                 html.Label('Select a policy:'), 
                                 dcc.Dropdown(
                                     id='policy', 
@@ -211,20 +215,46 @@ app.layout = html.Div([
                                     value='No selection')
                                 ], className = 'four columns')
                             ], className = 'row'),
+                        #break
+                        html.Br(),
                         # third row: Graph
                         html.Div([
                             html.Div([
                                 # graph
                                 dcc.Graph(
                                     id='fig1', 
-                                    figure=fig1)
+                                    figure=fig1,
+                                    style={'border': '1px solid slategray'})
                                 ], className = 'six columns'),
                             html.Div([
                                 # graph
                                 dcc.Graph(
                                     id='fig2', 
-                                    figure = fig2)
+                                    figure = fig2,
+                                    style={'border': '1px solid slategray'})
                                 ], className = 'six columns'),
+                            ], className = 'row'),
+                        #break
+                        html.Br(),
+                        # forth row: Company & Author & Data Source
+                        html.Div([
+                            html.Footer('Data Source: Oxford COVID-19 Government Response Tracker',
+                                        style={'color': 'slategray',
+                                               'font-family': 'arial',
+                                               'font-size': '80%',
+                                               'font-weight':'normal',
+                                               'padding': '5px',
+                                               'float':'left'})
+                            ], className = 'row'),
+                        
+                        html.Div([
+                            html.Footer('App by Georgio Anastasi',
+                                        style={'color': 'slategray',
+                                               'font-family': 'arial',
+                                               'font-size': '80%',
+                                               'font-weight':'normal',
+                                               'padding': '5px',
+                                               'float':'left'})
                             ], className = 'row'),
                         ],  
                     className='ten columns offset-by-one',
@@ -239,7 +269,7 @@ def updateFigure1(scope, measure, policy):
             return fig1
         else:
             return  px.scatter_geo(df,
-                                   title=str(measure)+' ('+str(scope)+') ', # change title depending on measure & scope
+                                   title=str(scope).title()+': '+str(measure) , # change title depending on measure & scope
                                    locations='CountryCode',
                                    color='Continent_Name',
                                    hover_name='CountryName',
@@ -248,10 +278,14 @@ def updateFigure1(scope, measure, policy):
                                    animation_frame='DateFormat1',
                                    projection='equirectangular',
                                    scope=scope, # if scope is not equal to world adjust to selection
-                                   opacity=0.8)
+                                   opacity=0.8,
+                                   labels={'CountryCode':'Country Code',
+                                           'CountryName':'Country Name',
+                                           'Continent_Name':'Continent Name',
+                                           'DateFormat1' : 'Date'})
     elif policy != 'No selection':
-        return px.choropleth(df, 
-                             title=str(policy)+' ('+str(scope)+') ', # change title depending on policy & scope
+        return px.choropleth(df,
+                             title=str(scope).title()+': '+str(policy), # change title depending on policy & scope
                              locations='CountryCode', 
                              color=policy, # if policy is not equal to no selection return the policy selected
                              color_continuous_scale='rdylgn_r', # pubugn , tealrose, rdylgn, ylorrd
@@ -272,7 +306,7 @@ def updateFigure2(measure, policy):
             return fig2
         else:
             return px.line(df_top5,
-                           title=str(measure)+' (Top 5 Countries)',
+                           title='Top 5 Countries: '+str(measure),
                            x='DateFormat1', 
                            y=measure, # if measure is not equal to confirmed cases return selection
                            color='CountryName',
@@ -283,7 +317,7 @@ def updateFigure2(measure, policy):
                                    'DateFormat1':'Date'})
     elif policy != 'No selection':
         return px.line(df_top5,
-                       title=str(policy)+' (Top 5 Countries)',
+                       title='Top 5 Countries: '+str(policy),
                        x='DateFormat1', 
                        y=policy, # if measure is not equal to confirmed cases return selection
                        color='CountryName',
