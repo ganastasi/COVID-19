@@ -162,7 +162,7 @@ from dash.dependencies import Input, Output
 
 server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] # Bootstrap use for layour 12 column by 5 row grid
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
 
 app.title = 'COVID-19'
 
