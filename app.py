@@ -161,7 +161,7 @@ from dash.dependencies import Input, Output
 
 server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] # Bootstrap use for layour 12 column by 5 row grid
-app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.title = 'COVID-19'
 
@@ -170,20 +170,40 @@ app.layout = html.Div([
                         html.Div([
                             html.Div([
                                 html.H1('COVID-19')
-                                ], className = 'eleven columns'),
+                                ],  className = 'eleven columns',
+                                    style={'color': 'black',
+                                          'font-family': 'Avenir',
+                                          'font-size': '80%',
+                                          #'font-weight':300,
+                                          'margin-bottom': '-1rem',
+                                          'margin-top': '1rem',
+                                          'margin-left': '1rem',
+                                          #'margin-right': '1rem',
+                                          'padding': '1px',
+                                          'float':'left'}),
                             html.Div([
                                 html.Img(src='http://pngimg.com/uploads/coronavirus/coronavirus_PNG46.png',
                                          style={'height'      :'100%',
                                                 'width'       :'100%',
                                                 'float'       :'right'})
-                                ], className = 'one column'),
-                            ], className = 'row'),
-                                                
-                        # second row: Filters
+                                ],  className = 'one column',
+                                    style={'margin-bottom': '1rem',
+                                           'margin-top': '1rem',
+                                           'margin-left': '1rem',
+                                           'margin-right': '1rem'}),
+                            ], className = 'row',
+                            style={'margin-bottom': '0.5rem',
+                                   'box-shadow':'0px 2px #bababa', # shadow of box
+                                   'background':'#ffffff'}),
+                        
+                        # second row: Filters & Figure 2
                         html.Div([
                             html.Div([
                                 # dropdown
-                                html.Label('Select a world map view:'), 
+                                html.Label('Select a world map view:',
+                                           style={'margin-top': '1rem',
+                                                  'margin-left': '1rem',
+                                                  'font-family': 'Avenir'}), 
                                 dcc.Dropdown(
                                     id='scope',
                                     options=[{'label': 'World',  'value': 'world'}, 
@@ -192,73 +212,92 @@ app.layout = html.Div([
                                              {'label': 'Europe', 'value': 'europe'},
                                              {'label': 'North America', 'value': 'north america'},
                                              {'label': 'South America', 'value': 'south america'}], 
-                                    value='world')
-                                ], className = 'four columns'),
-                            html.Div([
+                                    value='world',
+                                    style={'margin-top': '1rem',
+                                           'margin-left': '0.5rem',
+                                           'font-family': 'Avenir'}),
                                 # dropdown
-                                html.Label('Select a measure:'), 
+                                html.Label('Select a measure:',
+                                           style={'margin-top': '1rem',
+                                                  'margin-left': '1rem',
+                                                  'font-family': 'Avenir'}), 
                                 dcc.Dropdown(
                                     id='measure', 
                                     options=[{'label': 'Confirmed Cases',  'value': 'ConfirmedCases'},
                                              {'label': 'Confirmed Deaths', 'value': 'ConfirmedDeaths'},
                                              {'label': 'Stringecy Index',  'value': 'StringencyIndex'}], 
-                                    value='ConfirmedCases')
-                                ], className = 'four columns'),
-                            html.Div([
+                                    value='ConfirmedCases',
+                                    style={'margin-top': '1rem',
+                                           'margin-left': '0.5rem',
+                                           'font-family': 'Avenir'}),
                                 # dropdown
-                                html.Label('Select a policy:'), 
+                                html.Label('Select a policy:',
+                                           style={'margin-top': '1rem',
+                                                  'margin-left': '1rem',
+                                                  'font-family': 'Avenir'}), 
                                 dcc.Dropdown(
                                     id='policy', 
                                     options=[{'label': 'No selection',    'value': 'No selection'},
                                              {'label': 'School closing',  'value': 'School closing'},
                                              {'label': 'Staying at home', 'value': 'Stay at home requirements'}], 
-                                    value='No selection')
-                                ], className = 'four columns')
-                            ], className = 'row'),
-                        #break
-                        html.Br(),
-                        # third row: Graph
-                        html.Div([
-                            html.Div([
-                                # graph
-                                dcc.Graph(
-                                    id='fig1', 
-                                    figure=fig1,
-                                    style={'border': '1px solid slategray'})
-                                ], className = 'six columns'),
+                                    value='No selection',
+                                    style={'margin-top': '1rem',
+                                           'margin-left': '0.5rem',
+                                           'font-family': 'Avenir'})
+                                ], className = 'three columns'),
                             html.Div([
                                 # graph
                                 dcc.Graph(
                                     id='fig2', 
-                                    figure = fig2,
-                                    style={'border': '1px solid slategray'})
-                                ], className = 'six columns'),
-                            ], className = 'row'),
-                        #break
-                        html.Br(),
+                                    figure=fig2,
+                                    style={'border': '0.5px solid slategray',
+                                           'margin-top': '1rem',
+                                           'margin-right': '1rem'})
+                                ],  className = 'nine columns')
+                            ],  className = 'row',
+                                style={'background':'#f9f9f9'}),
+
+                        # third row: Figure 1
+                        html.Div([
+                            # graph
+                            dcc.Graph(
+                                id='fig1', 
+                                figure = fig1,
+                                style={'border': '0.5px solid slategray',
+                                       'margin-bottom': '1rem',
+                                       'margin-top': '1rem',
+                                       'margin-left': '1rem',
+                                       'margin-right': '1rem'})
+                            ],  className = 'twelve columns',
+                                style={'box-shadow':'0px 2px #bababa',
+                                       'background':'#f9f9f9'}),
+
                         # forth row: Company & Author & Data Source
                         html.Div([
                             html.Footer('Data Source: Oxford COVID-19 Government Response Tracker',
                                         style={'color': 'slategray',
-                                               'font-family': 'arial',
+                                               'font-family': 'Avenir',
                                                'font-size': '80%',
                                                'font-weight':'normal',
                                                'padding': '5px',
                                                'float':'left'})
-                            ], className = 'row'),
+                            ],  className = 'row',
+                                style={'background':'#ffffff'}),
                         
                         html.Div([
                             html.Footer('App by Georgio Anastasi',
                                         style={'color': 'slategray',
-                                               'font-family': 'arial',
+                                               'font-family': 'Avenir',
                                                'font-size': '80%',
                                                'font-weight':'normal',
                                                'padding': '5px',
                                                'float':'left'})
-                            ], className = 'row'),
-                        ],  
-                    className='ten columns offset-by-one',
-                    style={'backgroundColor': '#FFFFFF'})
+                            ],  className = 'row',
+                                style={'background':'#ffffff'}),
+                        ],  className='ten columns offset-by-one'
+                    )
+                    
+                    #style={'backgroundColor': '#000000'}
 
 @app.callback(Output('fig1', 'figure'),
               [Input('scope', 'value'), Input('measure', 'value'), Input('policy', 'value')])
