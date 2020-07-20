@@ -112,7 +112,7 @@ fig1 = px.scatter_geo(df,
                      color='Continent_Name',
                      hover_name='CountryName',
                      size='ConfirmedCases',
-                     size_max=40,
+                     size_max=30,
                      animation_frame='DateFormat1',
                      projection='equirectangular',
                      scope='world',
@@ -149,6 +149,7 @@ fig2 = px.line(df_top5,
                log_y=True,
                labels={'CountryName':'Country',
                        'DateFormat1':'Date'})
+
 
 # =============================================================================
 # DASH
