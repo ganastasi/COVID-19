@@ -164,6 +164,7 @@ server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] # Bootstrap use for layour 12 column by 5 row grid
 app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
 
+
 app.title = 'COVID-19'
 
 app.layout = html.Div([
@@ -174,27 +175,16 @@ app.layout = html.Div([
                                 ],  className = 'eleven columns',
                                     style={'color': 'black',
                                           'font-family': 'Avenir',
-                                          'font-size': '80%',
-                                          #'font-weight':300,
-                                          'margin-bottom': '-1rem',
-                                          'margin-top': '1rem',
-                                          'margin-left': '1rem',
-                                          #'margin-right': '1rem',
-                                          'padding': '1px',
                                           'float':'left'}),
                             html.Div([
                                 html.Img(src='http://pngimg.com/uploads/coronavirus/coronavirus_PNG46.png',
                                          style={'height'      :'100%',
                                                 'width'       :'100%',
                                                 'float'       :'right'})
-                                ],  className = 'one column',
-                                    style={'margin-bottom': '1rem',
-                                           'margin-top': '1rem',
-                                           'margin-left': '1rem',
-                                           'margin-right': '1rem'}),
+                                ],  className = 'one column'),
                             ], className = 'row',
-                            style={'margin-bottom': '0.5rem',
-                                   'box-shadow':'0px 2px #bababa', # shadow of box
+                            style={'padding':'5px',
+                                   'border-bottom': '2px solid #7b8a99',
                                    'background':'#ffffff'}),
                         
                         # second row: Filters & Figure 2
@@ -251,46 +241,55 @@ app.layout = html.Div([
                                 dcc.Graph(
                                     id='fig2', 
                                     figure=fig2,
-                                    style={'border': '0.5px solid slategray',
+                                    style={'box-shadow':'2px 2px #7b8a99',
+                                           'border-radius':'15px',
+                                           'background':'#ffffff',
+                                           'padding':'5px',
                                            'margin-top': '1rem',
+                                           'margin-bottom': '1rem',
                                            'margin-right': '1rem'})
                                 ],  className = 'nine columns')
                             ],  className = 'row',
-                                style={'background':'#f9f9f9'}),
+                                style={'background':'#dee2e6'}),
 
-                        # third row: Figure 1
+                        # third row: Graph
                         html.Div([
                             # graph
                             dcc.Graph(
                                 id='fig1', 
                                 figure = fig1,
-                                style={'border': '0.5px solid slategray',
+                                style={'box-shadow':'2px 2px #7b8a99',
+                                       'border-radius':'15px',
+                                       'background':'#ffffff',
+                                       'padding':'5px',
                                        'margin-bottom': '1rem',
-                                       'margin-top': '1rem',
                                        'margin-left': '1rem',
                                        'margin-right': '1rem'})
-                            ],  className = 'twelve columns',
-                                style={'box-shadow':'0px 2px #bababa',
-                                       'background':'#f9f9f9'}),
+                            ],  className = 'row',
+                                style={'border-bottom': '2px solid #7b8a99',
+                                       'background':'#dee2e6'}),
 
-                        # forth row: Company & Author & Data Source
+                        # forth row: Data Source
                         html.Div([
                             html.Footer('Data Source: Oxford COVID-19 Government Response Tracker',
                                         style={'color': 'slategray',
                                                'font-family': 'Avenir',
                                                'font-size': '80%',
                                                'font-weight':'normal',
+                                               'margin-top': '1rem',
                                                'padding': '5px',
                                                'float':'left'})
                             ],  className = 'row',
                                 style={'background':'#ffffff'}),
                         
+                        # fifth row: Author
                         html.Div([
                             html.Footer('App by Georgio Anastasi',
                                         style={'color': 'slategray',
                                                'font-family': 'Avenir',
                                                'font-size': '80%',
                                                'font-weight':'normal',
+                                               'margin-bottom': '1rem',
                                                'padding': '5px',
                                                'float':'left'})
                             ],  className = 'row',
@@ -298,7 +297,6 @@ app.layout = html.Div([
                         ],  className='ten columns offset-by-one'
                     )
                     
-                    #style={'backgroundColor': '#000000'}
 
 @app.callback(Output('fig1', 'figure'),
               [Input('scope', 'value'), Input('measure', 'value'), Input('policy', 'value')])
