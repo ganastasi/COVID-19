@@ -192,8 +192,8 @@ app.layout = html.Div([
                             html.Div([
                                 # dropdown
                                 html.Label('Select a world map view:',
-                                           style={'margin-top': '1rem',
-                                                  'margin-left': '1rem',
+                                           style={'margin-top': '10px',
+                                                  'margin-left': '5px',
                                                   'font-family': 'Avenir'}), 
                                 dcc.Dropdown(
                                     id='scope',
@@ -204,13 +204,15 @@ app.layout = html.Div([
                                              {'label': 'North America', 'value': 'north america'},
                                              {'label': 'South America', 'value': 'south america'}], 
                                     value='world',
-                                    style={'margin-top': '1rem',
-                                           'margin-left': '0.5rem',
-                                           'font-family': 'Avenir'}),
+                                    style={'margin-top': '5px',
+                                           'margin-left': '2px',
+                                           'font-family': 'Avenir',
+                                           'box-shadow':'2px 2px #7b8a99',
+                                           'border-radius':'5px'}),
                                 # dropdown
                                 html.Label('Select a measure:',
-                                           style={'margin-top': '1rem',
-                                                  'margin-left': '1rem',
+                                           style={'margin-top': '10px',
+                                                  'margin-left': '5px',
                                                   'font-family': 'Avenir'}), 
                                 dcc.Dropdown(
                                     id='measure', 
@@ -218,13 +220,15 @@ app.layout = html.Div([
                                              {'label': 'Confirmed Deaths', 'value': 'ConfirmedDeaths'},
                                              {'label': 'Stringecy Index',  'value': 'StringencyIndex'}], 
                                     value='ConfirmedCases',
-                                    style={'margin-top': '1rem',
-                                           'margin-left': '0.5rem',
-                                           'font-family': 'Avenir'}),
+                                    style={'margin-top': '5px',
+                                           'margin-left': '2px',
+                                           'font-family': 'Avenir',
+                                           'box-shadow':'2px 2px #7b8a99',
+                                           'border-radius':'5px'}),
                                 # dropdown
                                 html.Label('Select a policy:',
-                                           style={'margin-top': '1rem',
-                                                  'margin-left': '1rem',
+                                           style={'margin-top': '10px',
+                                                  'margin-left': '5px',
                                                   'font-family': 'Avenir'}), 
                                 dcc.Dropdown(
                                     id='policy', 
@@ -232,9 +236,11 @@ app.layout = html.Div([
                                              {'label': 'School closing',  'value': 'School closing'},
                                              {'label': 'Staying at home', 'value': 'Stay at home requirements'}], 
                                     value='No selection',
-                                    style={'margin-top': '1rem',
-                                           'margin-left': '0.5rem',
-                                           'font-family': 'Avenir'})
+                                    style={'margin-top': '5px',
+                                           'margin-left': '2px',
+                                           'font-family': 'Avenir',
+                                           'box-shadow':'2px 2px #7b8a99',
+                                           'border-radius':'5px'})
                                 ], className = 'three columns'),
                             html.Div([
                                 # graph
@@ -245,9 +251,9 @@ app.layout = html.Div([
                                            'border-radius':'15px',
                                            'background':'#ffffff',
                                            'padding':'5px',
-                                           'margin-top': '1rem',
-                                           'margin-bottom': '1rem',
-                                           'margin-right': '1rem'})
+                                           'margin-top': '10px',
+                                           'margin-bottom': '10px',
+                                           'margin-right': '10px'})
                                 ],  className = 'nine columns')
                             ],  className = 'row',
                                 style={'background':'#dee2e6'}),
@@ -262,9 +268,9 @@ app.layout = html.Div([
                                        'border-radius':'15px',
                                        'background':'#ffffff',
                                        'padding':'5px',
-                                       'margin-bottom': '1rem',
-                                       'margin-left': '1rem',
-                                       'margin-right': '1rem'})
+                                       'margin-bottom': '10px',
+                                       'margin-left': '10px',
+                                       'margin-right': '10px'})
                             ],  className = 'row',
                                 style={'border-bottom': '2px solid #7b8a99',
                                        'background':'#dee2e6'}),
@@ -276,7 +282,7 @@ app.layout = html.Div([
                                                'font-family': 'Avenir',
                                                'font-size': '80%',
                                                'font-weight':'normal',
-                                               'margin-top': '1rem',
+                                               'margin-top': '10px',
                                                'padding': '5px',
                                                'float':'left'})
                             ],  className = 'row',
@@ -289,7 +295,7 @@ app.layout = html.Div([
                                                'font-family': 'Avenir',
                                                'font-size': '80%',
                                                'font-weight':'normal',
-                                               'margin-bottom': '1rem',
+                                               'margin-bottom': '10px',
                                                'padding': '5px',
                                                'float':'left'})
                             ],  className = 'row',
