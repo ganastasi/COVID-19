@@ -164,7 +164,6 @@ server = flask.Flask(__name__)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] # Bootstrap use for layour 12 column by 5 row grid
 app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
 
-
 app.title = 'COVID-19'
 
 app.layout = html.Div([
@@ -193,7 +192,7 @@ app.layout = html.Div([
                                 # dropdown
                                 html.Label('Select a world map view:',
                                            style={'margin-top': '10px',
-                                                  'margin-left': '5px',
+                                                  'margin-left': '10px',
                                                   'font-family': 'Avenir'}), 
                                 dcc.Dropdown(
                                     id='scope',
@@ -205,42 +204,44 @@ app.layout = html.Div([
                                              {'label': 'South America', 'value': 'south america'}], 
                                     value='world',
                                     style={'margin-top': '5px',
-                                           'margin-left': '2px',
+                                           'margin-left': '3px',
                                            'font-family': 'Avenir',
                                            'box-shadow':'2px 2px #7b8a99',
                                            'border-radius':'5px'}),
-                                # dropdown
+                                # radio button
                                 html.Label('Select a measure:',
                                            style={'margin-top': '10px',
-                                                  'margin-left': '5px',
+                                                  'margin-left': '10px',
                                                   'font-family': 'Avenir'}), 
-                                dcc.Dropdown(
+                                dcc.RadioItems(
                                     id='measure', 
                                     options=[{'label': 'Confirmed Cases',  'value': 'ConfirmedCases'},
                                              {'label': 'Confirmed Deaths', 'value': 'ConfirmedDeaths'},
                                              {'label': 'Stringecy Index',  'value': 'StringencyIndex'}], 
                                     value='ConfirmedCases',
                                     style={'margin-top': '5px',
-                                           'margin-left': '2px',
+                                           'margin-left': '10px',
                                            'font-family': 'Avenir',
                                            'box-shadow':'2px 2px #7b8a99',
-                                           'border-radius':'5px'}),
-                                # dropdown
+                                           'border-radius':'5px',
+                                           'background':'#ffffff'}),
+                                # radio button
                                 html.Label('Select a policy:',
                                            style={'margin-top': '10px',
-                                                  'margin-left': '5px',
+                                                  'margin-left': '10px',
                                                   'font-family': 'Avenir'}), 
-                                dcc.Dropdown(
+                                dcc.RadioItems(
                                     id='policy', 
                                     options=[{'label': 'No selection',    'value': 'No selection'},
                                              {'label': 'School closing',  'value': 'School closing'},
                                              {'label': 'Staying at home', 'value': 'Stay at home requirements'}], 
                                     value='No selection',
                                     style={'margin-top': '5px',
-                                           'margin-left': '2px',
+                                           'margin-left': '10px',
                                            'font-family': 'Avenir',
                                            'box-shadow':'2px 2px #7b8a99',
-                                           'border-radius':'5px'})
+                                           'border-radius':'5px',
+                                           'background':'#ffffff'})
                                 ], className = 'three columns'),
                             html.Div([
                                 # graph
